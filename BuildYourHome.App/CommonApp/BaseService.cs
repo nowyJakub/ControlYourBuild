@@ -19,6 +19,21 @@ namespace BuildYourHome.App.CommonApp
         BaseElementList = new List<Element>();
         }
 
+
+        public int GetLastId()
+        {
+            int lastId = 0;
+            if (BaseElementList.Any())
+            {
+                lastId = BaseElementList.OrderBy(x => x.Id).LastOrDefault().Id;
+            }
+            else
+            {
+                lastId = 0;
+            }
+            return lastId;
+        }
+
         public void AddItem(Element BaseItem)
         {
             BaseElementList.Add(BaseItem);
@@ -41,6 +56,28 @@ namespace BuildYourHome.App.CommonApp
         public List<Element> GetAllItems()
         {
             return BaseElementList;
+        }
+
+        public Element GetItemById(int id)
+        {
+            Element entity = BaseElementList.FirstOrDefault(p =>p.Id == id);
+            return entity;
+        }
+
+        public int GetLenghtOfList()
+        {
+            int lenghtOfList = BaseElementList.Count;
+            return lenghtOfList;
+
+        }
+
+        public void DecreaseId( int PositionToStartDec)
+        {
+            //BaseElementList
+            for (int i = PositionToStartDec; i < BaseElementList.Count; i++)
+            {
+                BaseElementList[i].Id = BaseElementList[i].Id - 1;
+            }
         }
     }
 }

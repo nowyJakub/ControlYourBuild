@@ -1,29 +1,35 @@
-﻿using BuildYourHome.Domain.Entity;
+﻿using BuildYourHome.App.CommonApp;
+using BuildYourHome.Domain.Entity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BuildYourHome.App.CommonApp
+namespace BuildYourHome.App.Concrete
 {
-    public class GeneralTypeOfWorksService : BaseService<GeneralTypeOfWork>
+    public class CoreTypeOfWorksService : BaseService<CoreTypeOfWork>
     {
-        GeneralTypeOfWorksService()
+        public CoreTypeOfWorksService()
         {
             Initialize();
         }
 
+        public List<T> GetAllItems<T>()
+        {
+            throw new NotImplementedException();
+        }
+
         private void Initialize()
         {
-            AddItem(new GeneralTypeOfWork(1, "Dokumenty"));
-            AddItem(new GeneralTypeOfWork(2, "Fundament"));
-            AddItem(new GeneralTypeOfWork(3, "Sciany"));
-            AddItem(new GeneralTypeOfWork(4, "Dach"));
-
-
-
+            AddItem(new CoreTypeOfWork(0, null));
+            AddItem(new CoreTypeOfWork(1, "Dokumenty"));
+            AddItem(new CoreTypeOfWork(2, "Fundament"));
+            AddItem(new CoreTypeOfWork(3, "Sciany"));
+            AddItem(new CoreTypeOfWork(4, "Dach"));
         }
+
+
         //Menu
         // Utworz nowe typy, etapy
         // Dodaj aktywnosci
