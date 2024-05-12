@@ -26,8 +26,9 @@ namespace BuildYourHome.App.Concrete
         {
             AddItem(new ConcreteTypeOfWork(0, null, null));
             AddItem(new ConcreteTypeOfWork(1, _baseCoreService.GetItemById(1), "Projekt"));
-            AddItem(new ConcreteTypeOfWork(2, _baseCoreService.GetItemById(1), "Mapka od Geodety"));
-            AddItem(new ConcreteTypeOfWork(3, _baseCoreService.GetItemById(2), "Lawy"));
+            AddItem(new ConcreteTypeOfWork(2, _baseCoreService.GetItemById(1), "Przylacze elek"));
+            AddItem(new ConcreteTypeOfWork(3, _baseCoreService.GetItemById(2), "Zalewani Law"));
+            AddItem(new ConcreteTypeOfWork(4, _baseCoreService.GetItemById(2), "Sciany fundamentowe"));
 
 
         }

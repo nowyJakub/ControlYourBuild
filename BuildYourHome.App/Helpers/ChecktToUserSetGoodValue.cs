@@ -31,5 +31,13 @@ namespace BuildYourHome.App.Helpers
 
             return IsOk;
         }
+
+        public static bool String_ToDateTime (string value, string format)
+        {
+            bool IsOK = DateTime.TryParseExact(value, format, System.Globalization.CultureInfo.InvariantCulture, 
+                                                System.Globalization.DateTimeStyles.None, out DateTime tempDate); 
+            return IsOK;
+
+        }
     }
 }

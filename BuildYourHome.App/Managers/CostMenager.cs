@@ -13,9 +13,10 @@ namespace BuildYourHome.App.Managers
 {
     public class CostMenager
     {
-        private  IBaseService<Cost> CostService;
+        private  CostService CostService;
         private readonly IBaseService<ConcreteTypeOfWork> _concreteTypeOfWork;
-        public CostMenager(IBaseService<Cost> costService,
+
+        public CostMenager(CostService costService,
                            IBaseService<ConcreteTypeOfWork> concreteType)
         {
             CostService = costService;
@@ -34,7 +35,7 @@ namespace BuildYourHome.App.Managers
             while (exitLoop == false)
             {
                 ChangeTextColor.PrintInformation("Wybierz typ prac dla którego chcesz dodać koszty:");
-                for (int i = 1; i<=ListOfConctreteType.Count; i++)
+                for (int i = 1; i<ListOfConctreteType.Count; i++)
                 {
                     ChangeTextColor.PrintInformation($"{ListOfConctreteType[i].Id}. " +
                         $"{ListOfConctreteType[i].CoreTypeOfWork.GeneralType} " +
@@ -88,18 +89,60 @@ namespace BuildYourHome.App.Managers
                     int lastId = CostService.GetLastId();
                     Cost newCost = new Cost(lastId + 1, ChosenConcreteTypeOfWork, MaterialName, CostVal, AmmountVal);
 
-                    
-
                     CostService.AddItem(newCost);
-                   
-                    
 
+                    exitLoop = true;
+                    newId = newCost.Id;
 
-                  
                 }
             }
 
             return newId;
+        }
+
+        public void PrintListAllCost()
+        {
+            var ListOfCost = CostService.GetAllItems();
+
+            Console.Clear();    
+            for (int i = 1; i < ListOfCost.Count; i++)
+            {
+                ChangeTextColor.PrintInformation($"{ListOfCost[i].Id}. " +
+                    $"{ListOfCost[i].SecondTypeOfWork.CoreTypeOfWork.GeneralType} - " +
+                    $"{ListOfCost[i].SecondTypeOfWork.DetailOfTypeWork} : " +
+                    $"Produkt {ListOfCost[i].Materil}, " +
+                    $"Koszt całkowity : {ListOfCost[i].TotalCost}," +
+                    $" Koszt za 1 szt. :{ListOfCost[i].DetailCost} zl" +
+                    $" Ilosc sztuk {ListOfCost[i].DetailCount} " );
+            }
+        }
+
+
+
+        public void PrintListWhithWholeCostForBuildStage()
+        {
+            List<Cost> costList = CostService.GetAllItems();
+            List<Cost> summaryCostList = CostService.GetListOfConcreteType();
+
+            for (int i = 1; i<costList.Count; i++ )
+            {    
+                for (int j = 1; j<summaryCostList.Count; j++)
+                {
+                    if (costList[i].SecondTypeOfWork.Id == j)
+                    {
+                        summaryCostList[j].TotalCost = summaryCostList[j].TotalCost + costList[i].TotalCost;
+                    } 
+                }
+            }
+
+            for (int i = 1;i<summaryCostList.Count;i++ )
+            {
+                ChangeTextColor.PrintInformation($"{summaryCostList[i].Id}. " +
+                    $"{summaryCostList[i].SecondTypeOfWork.CoreTypeOfWork.GeneralType} - " +
+                    $"{summaryCostList[i].SecondTypeOfWork.DetailOfTypeWork} : " +
+                    $"Koszt całkowity : {summaryCostList[i].TotalCost},");
+            }
+
         }
     }
 }

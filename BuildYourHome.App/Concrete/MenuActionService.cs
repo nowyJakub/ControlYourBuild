@@ -32,10 +32,11 @@ namespace BuildYourHome.App.Concrete
         {
             AddItem(new MenuAction(1, "Dodaj koszt dla danego etapu", "Main"));
             AddItem(new MenuAction(2, "Wyswietl koszty", "Main"));
-            AddItem(new MenuAction(3, "Dodaj nowy terminy prac dla etapow", "Main"));
-            AddItem(new MenuAction(4, "Wyswietl czasy trwania prac", "Main"));
-            AddItem(new MenuAction(5, "Zmiana danych", "Main"));
-            AddItem(new MenuAction(6, "Konfiguracja etapów", "Main"));
+            AddItem(new MenuAction(3, "Wyswietl sumaryczne koszty dla etapu", "Main"));
+            AddItem(new MenuAction(4, "Dodaj nowy terminy prac dla etapow", "Main"));
+            AddItem(new MenuAction(5, "Wyswietl czasy trwania prac", "Main"));
+            AddItem(new MenuAction(6, "Zmiana danych", "Main"));
+            AddItem(new MenuAction(7, "Konfiguracja etapów", "Main"));
 
 
             AddItem(new MenuAction(1, "Change Data in costs of works", "ChangeData"));

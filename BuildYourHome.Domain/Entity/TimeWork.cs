@@ -10,10 +10,13 @@ namespace BuildYourHome.Domain.Entity
 {
     public class TimeWork : BaseEntity
     {
-        ConcreteTypeOfWork SecondTypeOfWork { get; set; }
+        public ConcreteTypeOfWork SecondTypeOfWork { get; set; }
         public DateTime StartWork { get; set; }
         public DateTime EndWork { get; set; }
-        public DateTime DuringWorkingTime { get; set; }
+        public TimeSpan DuringWorkingTime { get; set; }
+        public int TotalMonths { get; set; }
+        public int RemainingDays { get; set; }
+        
 
         public TimeWork (int id, ConcreteTypeOfWork secondType, DateTime startWork, DateTime endWork)
         {
@@ -21,6 +24,12 @@ namespace BuildYourHome.Domain.Entity
             SecondTypeOfWork = secondType;
             StartWork = startWork;
             EndWork = endWork;
+            DuringWorkingTime = EndWork - StartWork;
+
+            
+            TotalMonths = ((EndWork.Year - StartWork.Year) * 12) + EndWork.Month - StartWork.Month;
+            RemainingDays = (int)DuringWorkingTime.TotalDays - TotalMonths * 
+                                DateTime.DaysInMonth(StartWork.Year, StartWork.Month);
 
         }
 
